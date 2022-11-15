@@ -20,7 +20,9 @@
 
 // This is the main component being exported from this file
 export default function AnswersItem(props) {
-  const { ownerName, colourRating, spendTime, comments } = props;
+  const { ownerName, colourRating, spendTime, comments, id, editAnswer } =
+    props;
+
   return (
     <li>
       <article className="answer">
@@ -38,6 +40,9 @@ export default function AnswersItem(props) {
           <em>What else have you got to say about your rubber duck?</em>
           <span className="answer__line">{comments}</span>
         </p>
+        <button type="button" onClick={() => editAnswer(id)}>
+          Edit
+        </button>
       </article>
     </li>
   );

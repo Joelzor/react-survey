@@ -16,7 +16,10 @@ function Main() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setAnswersList([...answersList, formState]);
+    setAnswersList([
+      ...answersList,
+      { ...formState, id: new Date().getTime().toString() },
+    ]);
     setFormState(initialFormState);
   };
 
@@ -40,11 +43,25 @@ function Main() {
     }
   };
 
+  const editAnswer = (id) => {
+    answersList.map((answer) => {
+      if (answer.id === id) {
+        setFormState({
+          colourRating: answer.colourRating,
+          ownerName: answer.ownerName,
+          comments: answer.comments,
+          spendTime: answer.spendTime,
+          email: answer.email,
+        });
+      }
+    });
+  };
+
   return (
     <main className="main">
       <section className={`main__list ${open ? "open" : ""}`}>
         <h2>Answers list</h2>
-        <AnswersList answersList={answersList} />
+        <AnswersList answersList={answersList} editAnswer={editAnswer} />
       </section>
       <section className="main__form">
         <form className="form" onSubmit={handleSubmit}>
