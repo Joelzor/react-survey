@@ -4,7 +4,7 @@ const initialFormState = {
   colourRating: "",
   spendTime: "",
   comments: "",
-  name: "",
+  ownerName: "",
   email: "",
 };
 
@@ -23,6 +23,18 @@ function Main() {
     const targetValue = e.target.value;
     if (targetName === "color") {
       setFormState({ ...formState, colourRating: targetValue });
+    }
+    if (targetName === "spend-time") {
+      setFormState({ ...formState, spendTime: targetValue });
+    }
+    if (targetName === "review") {
+      setFormState({ ...formState, comments: targetValue });
+    }
+    if (targetName === "username") {
+      setFormState({ ...formState, ownerName: targetValue });
+    }
+    if (targetName === "email") {
+      setFormState({ ...formState, email: targetValue });
     }
   };
 
@@ -89,41 +101,81 @@ function Main() {
             <ul>
               <li>
                 <label>
-                  <input name="spend-time" type="checkbox" value="swimming" />
+                  <input
+                    name="spend-time"
+                    type="checkbox"
+                    value="swimming"
+                    checked={formState.spendTime === "swimming"}
+                    onChange={handleChange}
+                  />
                   Swimming
                 </label>
               </li>
               <li>
                 <label>
-                  <input name="spend-time" type="checkbox" value="bathing" />
+                  <input
+                    name="spend-time"
+                    type="checkbox"
+                    value="bathing"
+                    checked={formState.spendTime === "bathing"}
+                    onChange={handleChange}
+                  />
                   Bathing
                 </label>
               </li>
               <li>
                 <label>
-                  <input name="spend-time" type="checkbox" value="chatting" />
+                  <input
+                    name="spend-time"
+                    type="checkbox"
+                    value="chatting"
+                    checked={formState.spendTime === "chatting"}
+                    onChange={handleChange}
+                  />
                   Chatting
                 </label>
               </li>
               <li>
                 <label>
-                  <input name="spend-time" type="checkbox" value="noTime" />I
-                  don't like to spend time with it
+                  <input
+                    name="spend-time"
+                    type="checkbox"
+                    value="noTime"
+                    checked={formState.spendTime === "noTime"}
+                    onChange={handleChange}
+                  />
+                  I don't like to spend time with it
                 </label>
               </li>
             </ul>
           </div>
           <label>
             What else have you got to say about your rubber duck?
-            <textarea name="review" cols="30" rows="10"></textarea>
+            <textarea
+              name="review"
+              cols="30"
+              rows="10"
+              value={formState.comments}
+              onChange={handleChange}
+            ></textarea>
           </label>
           <label>
             Put your name here (if you feel like it):
-            <input type="text" name="username" value="" />
+            <input
+              type="text"
+              name="username"
+              value={formState.ownerName}
+              onChange={handleChange}
+            />
           </label>
           <label>
             Leave us your email pretty please??
-            <input type="email" name="email" value="" />
+            <input
+              type="email"
+              name="email"
+              value={formState.email}
+              onChange={handleChange}
+            />
           </label>
           <input class="form__submit" type="submit" value="Submit Survey!" />
         </form>
