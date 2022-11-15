@@ -1,4 +1,5 @@
 import { useState } from "react";
+import AnswersList from "./AnswersList";
 
 const initialFormState = {
   colourRating: "",
@@ -11,10 +12,11 @@ const initialFormState = {
 function Main() {
   const [open, setOpen] = useState(false); //Ignore this state
   const [formState, setFormState] = useState(initialFormState);
+  const [answersList, setAnswersList] = useState([]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(formState);
+    setAnswersList([...answersList, formState]);
     setFormState(initialFormState);
   };
 
@@ -42,12 +44,12 @@ function Main() {
     <main className="main">
       <section className={`main__list ${open ? "open" : ""}`}>
         <h2>Answers list</h2>
-        {/* answers should go here */}
+        <AnswersList answersList={answersList} />
       </section>
       <section className="main__form">
-        <form class="form" onSubmit={handleSubmit}>
+        <form className="form" onSubmit={handleSubmit}>
           <h2>Tell us what you think about your rubber duck!</h2>
-          <div class="form__group radio">
+          <div className="form__group radio">
             <h3>How do you rate your rubber duck colour?</h3>
             <ul>
               <li>
@@ -59,7 +61,7 @@ function Main() {
                   checked={formState.colourRating === "1"}
                   onChange={handleChange}
                 />
-                <label for="color-one">1</label>
+                <label htmlFor="color-one">1</label>
               </li>
               <li>
                 <input
@@ -70,7 +72,7 @@ function Main() {
                   checked={formState.colourRating === "2"}
                   onChange={handleChange}
                 />
-                <label for="color-two">2</label>
+                <label htmlFor="color-two">2</label>
               </li>
               <li>
                 <input
@@ -81,7 +83,7 @@ function Main() {
                   checked={formState.colourRating === "3"}
                   onChange={handleChange}
                 />
-                <label for="color-three">3</label>
+                <label htmlFor="color-three">3</label>
               </li>
               <li>
                 <input
@@ -92,11 +94,11 @@ function Main() {
                   checked={formState.colourRating === "4"}
                   onChange={handleChange}
                 />
-                <label for="color-four">4</label>
+                <label htmlFor="color-four">4</label>
               </li>
             </ul>
           </div>
-          <div class="form__group">
+          <div className="form__group">
             <h3>How do you like to spend time with your rubber duck</h3>
             <ul>
               <li>
@@ -177,7 +179,11 @@ function Main() {
               onChange={handleChange}
             />
           </label>
-          <input class="form__submit" type="submit" value="Submit Survey!" />
+          <input
+            className="form__submit"
+            type="submit"
+            value="Submit Survey!"
+          />
         </form>
       </section>
     </main>
