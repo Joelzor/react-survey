@@ -16,6 +16,20 @@ function Main() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    if (answersList.find((answer) => answer.id === formState.id)) {
+      const updatedAnswersList = answersList.map((answer) => {
+        if (answer.id === formState.id) {
+          const copy = { ...formState };
+          return copy;
+        } else {
+          return answer;
+        }
+      });
+      setAnswersList([...updatedAnswersList]);
+      return;
+    }
+
     setAnswersList([
       ...answersList,
       { ...formState, id: new Date().getTime().toString() },
@@ -52,6 +66,7 @@ function Main() {
           comments: answer.comments,
           spendTime: answer.spendTime,
           email: answer.email,
+          id: answer.id,
         });
       }
     });
