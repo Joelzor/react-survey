@@ -20,8 +20,7 @@ function Main() {
     if (answersList.find((answer) => answer.id === formState.id)) {
       const updatedAnswersList = answersList.map((answer) => {
         if (answer.id === formState.id) {
-          const copy = { ...formState };
-          return copy;
+          return { ...formState };
         } else {
           return answer;
         }
@@ -60,14 +59,15 @@ function Main() {
   const editAnswer = (id) => {
     answersList.map((answer) => {
       if (answer.id === id) {
-        setFormState({
-          colourRating: answer.colourRating,
-          ownerName: answer.ownerName,
-          comments: answer.comments,
-          spendTime: answer.spendTime,
-          email: answer.email,
-          id: answer.id,
-        });
+        // setFormState({
+        //   colourRating: answer.colourRating,
+        //   ownerName: answer.ownerName,
+        //   comments: answer.comments,
+        //   spendTime: answer.spendTime,
+        //   email: answer.email,
+        //   id: answer.id,
+        // });
+        setFormState({ ...answer });
       }
     });
   };
